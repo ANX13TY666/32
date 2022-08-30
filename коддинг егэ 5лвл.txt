@@ -1,0 +1,117 @@
+for i in range(256):  # Инвертируется двоичная система и результат == 99
+    s = format(i, '08b')
+    a = s
+    if s.count('1'):
+        a = s.replace('1', 'a')
+    if a.count('0'):
+        a = a.replace('0', 'f')
+    if a.count('a'):
+        a = a.replace('a', '0')
+    if a.count('f'):
+        a = a.replace('f', '1')    
+    result = int(a, 2) - i
+    if result == 99:   
+        print(i)
+
+
+
+for i in range(1000): # слева направо читается двоичка  == 29
+    s = bin(i)[2:]
+    if int(s[::-1], 2) == 29:
+        print(i)
+        print(format(i, '08b'))
+        print(format(i, '08b')[::-1])
+        print(int(format(i, '08b')[::-1], 2))
+       
+
+
+#тип 5 № 9190 Добавить в вариант Автомат получает на вход трёхзначное число. По этому числу строится новое число по следующим правилам. 
+
+# 1. Складываются первая и вторая, а также вторая и третья цифры исходного числа.
+
+# 2. Полученные два числа записываются друг за другом в порядке возрастания (без разделителей).
+
+
+# Пример. Исходное число: 843. Суммы: 8 + 4 = 12; 4 + 3 = 7. Результат: 712.
+
+# Сколько существует чисел, в результате обработки которых автомат выдаст число 1216?
+answer = []
+for i in range(100,1000):
+    ch = str(i)
+    a = int(ch[0])+int(ch[1])
+    b = int(ch[1])+int(ch[2])
+    if a < b:
+        result = str(a) + str(b)
+    else:
+        result = str(b) +str(a)
+    if int(result) == 1216:
+        answer.append(i)
+        
+        print(i)
+print(len(answer))
+
+
+
+
+def fithlvl(i): # цисло > 95 далее Двоичное число без ведущих нолей. Сравниваются 0 и 1, если чего-то больше, то + знак того, что меньше. Если одинаково - то + последний знак. Check % 4 == 0
+    binned = bin(i)[2:]
+    for an in range(3):
+        if binned.count('0') > binned.count('1'):
+            binned += '1'
+        elif binned.count('0') < binned.count('1'):
+            binned += '0'
+        else:
+            binned += binned[-1]
+    result = int(binned, 2)
+    if result % 4 == 0:
+        print(f'ОТВЕТ В ДЕСЯТИЧНОЙ: {i}')
+        print(f'ответ в двоичной системе: {bin(i)[2:]}')
+        print(f'результат алгоритма в десятичной системе: {result}')
+        print(f'результат алгоритма в двоичной системе: {bin(result)[2:]}')
+        quit()
+
+
+for i in range(96, 10000000000000000):
+    fithlvl(i)
+
+
+
+for i in range(91000): # Складываются четные числа минус сумма цифр с нечетными индексами
+    ch = str(i)
+    s1 = 0
+    s2 = 0 
+    
+    
+    for an in range(len(ch)):
+        if int(ch[an]) % 2 == 0:
+            s1 += int(ch[an])
+        if an % 2 == 0:
+            s2 += int(ch[an])
+            
+    r = s1 - s2
+    if abs(r) == 27:
+        print(type(ch), (ch))
+        print(s1, s2)
+        print(i)
+        break
+
+
+######################################################
+sum = 0
+a = 956
+b = 9
+
+for d in range(10,100):     
+    b = b + 1
+    a = 956
+    
+    for dva in range (956, 1056):
+        a = a + 1
+        sum = a + b
+        
+        if sum == 1056:
+            set_anw = set(str(a) + str(b) + str(sum))
+            if len(set_anw) == len((str(a) + str(b) + str(sum))):
+                print(a,b, sum)
+
+####################################################################
